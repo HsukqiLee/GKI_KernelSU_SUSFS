@@ -33,6 +33,7 @@ on:
         - Next
         - MKSU
         - SukiSU
+        - ReSukiSU
         default: ReSukiSU
       kernelsu_branch:
         description: "Select KSU branch"
