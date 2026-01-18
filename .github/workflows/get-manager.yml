@@ -9,6 +9,9 @@ on:
       kernelsu_variant:
         required: true
         type: string
+      kernelsu_branch:
+        required: true
+        type: string
 
 jobs:
   get_ksu_manager:
@@ -44,7 +47,16 @@ jobs:
             echo "KSU_VERSION=$KSU_VERSION" >> $GITHUB_ENV
           elif [ "${{ inputs.kernelsu_variant }}" == "ReSukiSU" ]; then
             echo "This is the ReSukiSU variant"
-            git clone https://github.com/ReSukiSU/ReSukiSU.git
+            # Determine branch based on kernelsu_branch input
+            if [ "${{ inputs.kernelsu_branch }}" == "Stable(标准)" ]; then
+              BRANCH="main"
+            elif [ "${{ inputs.kernelsu_branch }}" == "Dev(开发)" ]; then
+              BRANCH="new-manager"
+            else
+              BRANCH="main"  # Default to main
+            fi
+            echo "Cloning ReSukiSU with branch: $BRANCH"
+            git clone https://github.com/ReSukiSU/ReSukiSU.git -b "$BRANCH"
             cd ReSukiSU
             KSU_GIT_VERSION=$(git rev-list --count HEAD)
             KSU_VERSION=$((10000 + KSU_GIT_VERSION + 800))
