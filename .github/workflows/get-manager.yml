@@ -89,11 +89,11 @@ jobs:
           
           # 获取 Manager 文件的下载链接
           if [ "${{ inputs.kernelsu_variant }}" == "Next" ]; then
-            DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '.artifacts[] | select(.name | contains("Manager")) | .archive_download_url')
+            DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '[.artifacts[] | select(.name | contains("Manager")) | .archive_download_url] | .[0]')
           elif [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
-            DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '.artifacts[] | select(.name | contains("Manager")) | .archive_download_url')
+            DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '[.artifacts[] | select(.name | contains("Manager")) | .archive_download_url] | .[0]')
           elif [ "${{ inputs.kernelsu_variant }}" == "ReSukiSU" ]; then
-            DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '.artifacts[] | select(.name | contains("Manager")) | .archive_download_url')
+            DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '[.artifacts[] | select(.name | contains("Manager")) | .archive_download_url] | .[0]')
           fi
           
           # 验证 DOWNLOAD_URL 是否有效
