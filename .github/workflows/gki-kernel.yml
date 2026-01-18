@@ -156,7 +156,19 @@ jobs:
 
           # Clone repositories using the branch names
           git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
-          git clone https://github.com/ShirkNeko/susfs4ksu.git -b "$SUSFS_BRANCH"
+          
+          # Clone SUSFS based on KernelSU variant
+          if [ "${{ inputs.kernelsu_variant }}" == "ReSukiSU" ]; then
+            echo "Cloning simonpunk's original SUSFS for ReSukiSU..."
+            git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
+          elif [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
+            echo "Cloning ShirkNeko's SUSFS for SukiSU..."
+            git clone https://github.com/ShirkNeko/susfs4ksu.git -b "$SUSFS_BRANCH"
+          else
+            echo "Using ShirkNeko's SUSFS for other variants..."
+            git clone https://github.com/ShirkNeko/susfs4ksu.git -b "$SUSFS_BRANCH"
+          fi
+          
           git clone https://github.com/Tools-cx-app/kernel_patches.git
           # Sukisu的补丁仓库
           git clone https://github.com/ShirkNeko/SukiSU_patch.git
