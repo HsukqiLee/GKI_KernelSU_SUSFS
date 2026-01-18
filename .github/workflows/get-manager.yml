@@ -114,4 +114,4 @@ jobs:
         with:
           name: ${{ inputs.kernelsu_variant }}-Manager(${{ env.KSU_VERSION }})
           path: |
-            *.apk
+            **/*.apk
