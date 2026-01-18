@@ -161,11 +161,8 @@ jobs:
           if [ "${{ inputs.kernelsu_variant }}" == "ReSukiSU" ]; then
             echo "Cloning simonpunk's original SUSFS for ReSukiSU..."
             git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
-          elif [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
-            echo "Cloning ShirkNeko's SUSFS for SukiSU..."
-            git clone https://github.com/ShirkNeko/susfs4ksu.git -b "$SUSFS_BRANCH"
           else
-            echo "Using ShirkNeko's SUSFS for other variants..."
+            echo "Cloning ShirkNeko's SUSFS for SukiSU and other variants..."
             git clone https://github.com/ShirkNeko/susfs4ksu.git -b "$SUSFS_BRANCH"
           fi
           
